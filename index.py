@@ -4,6 +4,8 @@ import random
 import os
 
 tokenBot = os.getenv('TELEGRAM_BOT_TOKEN')
+
+
 def handler(event, context):
     try:
         if "body" in event:
@@ -14,24 +16,33 @@ def handler(event, context):
                 if "text" in fromMessage:
                     message = ''.join(filter(str.isalnum, fromMessage['text'])).lower().replace("\xc2\xa0", "")
                     print(message)
-                    chat_id = fromMessage['chat']['id']
-                    message_id = fromMessage['message_id']
+                    data = {"chat_id": fromMessage['chat']['id'], 'reply_to_message_id': fromMessage['message_id']}
+
                     title = ''
+
                     if "title" in fromMessage['chat']:
                         title = fromMessage['chat']['title']
 
                     if message == 'да' or message == 'if':
                         if getRandom(5) and title == 'REBELS':
-                            sendAnswer("@Basil_MrX ты знаешь что делать!", chat_id, message_id)
+                            data['text'] = "@Basil_MrX ты знаешь что делать!"
+                            sendToBot('sendMessage', data)
                         elif getRandom(10):
-                            sendAnswer("Вы забываете правило ДА?", chat_id, message_id)
+                            data['text'] = "Вы забываете правило ДА?"
+                            sendToBot('sendMessage', data)
                         else:
-                            sendSticker(getPizdaSticker(), chat_id, message_id)
+                            data['sticker'] = getPizdaSticker()
+                            sendToBot('sendSticker', data)
+
                     elif message == 'пизда':
                         if getRandom(3):
-                            sendAnswer(getMessageAnswerPizda(), chat_id, message_id)
+                            data['text'] = getMessageAnswerPizda()
+                            sendToBot('sendMessage', data)
+
                     elif message == 'start':
-                            sendAnswer('ВНИМАНИЕ! Бот может непоправимо травмировать вашу психику. Если вы согласны с условиями использования бота напишите "ДА" в ответном сообщение', chat_id, message_id)
+                        data[
+                            'text'] = 'ВНИМАНИЕ! Бот может непоправимо травмировать вашу психику. Если вы согласны с условиями использования бота напишите "ДА" в ответном сообщение'
+                        sendToBot('sendMessage', data)
 
         r = {'statusCode': 200, 'body': 'Message send'}
 
@@ -42,25 +53,13 @@ def handler(event, context):
     return r
 
 
-def sendMessage(message, chat_id):
-    url = f"https://api.telegram.org/bot{tokenBot}/sendMessage?chat_id={chat_id}&text={message}"
-    print(url)
-    print(requests.get(url).json())
-    return True
-
-
-def sendAnswer(message, chat_id, message_id):
-    url = f"https://api.telegram.org/bot{tokenBot}/sendMessage?chat_id={chat_id}&text={message}&reply_to_message_id={message_id}"
-    print(url)
-    print(requests.get(url).json())
-    return True
-
-
-def sendSticker(sticker, chat_id, message_id):
-    url = f"https://api.telegram.org/bot{tokenBot}/sendSticker?chat_id={chat_id}&sticker={sticker}&reply_to_message_id={message_id}"
-    print(url)
-    print(requests.get(url).json())
-    return True
+def sendToBot(type, data):
+    r = 'Not send'
+    allowtypes = ['sendMessage', 'sendSticker']
+    if type in allowtypes:
+        url = f"https://api.telegram.org/bot{tokenBot}/{type}"
+        r = requests.post(url, data=data)
+    return r
 
 
 def getPizdaSticker():
