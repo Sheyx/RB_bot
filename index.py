@@ -27,7 +27,7 @@ def handler(event, context):
                         if getRandom(5) and title == 'REBELS':
                             data['text'] = "@Basil_MrX ты знаешь что делать!"
                             sendToBot('sendMessage', data)
-                        elif getRandom(10):
+                        elif getRandom(20):
                             data['text'] = "Вы забываете правило ДА?"
                             sendToBot('sendMessage', data)
                         else:
@@ -35,9 +35,12 @@ def handler(event, context):
                             sendToBot('sendSticker', data)
 
                     elif message == 'пизда':
-                        if getRandom(3):
+                        if getRandom(5):
                             data['text'] = getMessageAnswerPizda()
                             sendToBot('sendMessage', data)
+                        else:
+                            data['sticker'] = getStickerAnswer()
+                            sendToBot('sendSticker', data)
 
                     elif message == 'start':
                         data[
@@ -70,10 +73,7 @@ def getPizdaSticker():
         'CAACAgIAAxkBAANQZfliNX5TzTlbiVWLKg3GhqCRRKwAAjUqAALm9vlJKp5EtAAB5dspNAQ',
         'CAACAgIAAxkBAANQZfliNX5TzTlbiVWLKg3GhqCRRKwAAjUqAALm9vlJKp5EtAAB5dspNAQ',
         'CAACAgIAAxkBAANQZfliNX5TzTlbiVWLKg3GhqCRRKwAAjUqAALm9vlJKp5EtAAB5dspNAQ',
-        'CAACAgIAAxkBAANQZfliNX5TzTlbiVWLKg3GhqCRRKwAAjUqAALm9vlJKp5EtAAB5dspNAQ',
-        'CAACAgIAAxkBAANQZfliNX5TzTlbiVWLKg3GhqCRRKwAAjUqAALm9vlJKp5EtAAB5dspNAQ',
-        'CAACAgIAAxkBAANQZfliNX5TzTlbiVWLKg3GhqCRRKwAAjUqAALm9vlJKp5EtAAB5dspNAQ',
-        'CAACAgIAAxkBAANQZfliNX5TzTlbiVWLKg3GhqCRRKwAAjUqAALm9vlJKp5EtAAB5dspNAQ',
+        'CAACAgIAAxkBAAELxMJl_IuXD01Knq4G1Gg4SOVIcgMP1AACcTUAAvcl-EmrFIJq7VbWazQE',
         'CAACAgIAAxkBAAEEMXVl-zwWr0XgF-CVpziOphw5lg-3kAACxBIAAkOVmUpPyf4zUm0dLTQE',
         'CAACAgQAAxkBAAEEMYll-z2BGOzo6nTQHQIdEe3ffyW9cQAC3QMAAj72Fwd0FUpFbL3jWjQE'
     ]
@@ -94,3 +94,15 @@ def getMessageAnswerPizda():
         '100 очков ГРИФФИНДОР этому господину!!!'
     ]
     return random.choice(message)
+
+def getStickerAnswer():
+    sticker = [
+        'CAACAgIAAxkBAAELxL5l_ItlkakqW8P-WpVbz-Fmumd_gQACjioAAlE2AAFK8Jl1RBtzQPQ0BA',
+        'CAACAgIAAxkBAAELxMBl_It28MNLyE21yG4BZE5nvprr-AACPCkAAnHz8UlE1KWjHHr-jDQE',
+        'CAACAgIAAxkBAAELxMRl_Iu1Xpq0M8UB631w53IKCxurIgACYikAAipQGUrdhL1iVbh7QTQE',
+        'CAACAgIAAxkBAAELxMZl_IvLzQMvqNMYTG4ZilvZLSYMBQACrB4AAv5FqEv88y-kOdzgbDQE',
+        'CAACAgIAAxkBAAELxMhl_IvVVfko9W8WO1UKopjfazoE1wACUBwAAhkLqEtwcwYtOigoYzQE',
+        'CAACAgIAAxkBAAELxMpl_IvtXoJ1AAGVaSgaZfAZVzgtWbAAAp8mAAKMyflJi4wTH4bWwvM0BA',
+        'CAACAgIAAxkBAAELxMxl_IwzuFaT6kGu4J0IFr94YF8h7wACUiYAAjH8AUrdS3JHfFVUTDQE'
+    ]
+    return random.choice(sticker)
