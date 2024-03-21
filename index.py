@@ -16,8 +16,12 @@ def handler(event, context):
                     print(message)
                     chat_id = fromMessage['chat']['id']
                     message_id = fromMessage['message_id']
+                    title = ''
+                    if "title" in fromMessage['chat']:
+                        title = fromMessage['chat']['title']
+
                     if message == 'да' or message == 'if':
-                        if getRandom(5):
+                        if getRandom(5) and title == 'REBELS':
                             sendAnswer("@Basil_MrX ты знаешь что делать!", chat_id, message_id)
                         elif getRandom(10):
                             sendAnswer("Вы забываете правило ДА?", chat_id, message_id)
