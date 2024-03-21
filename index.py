@@ -27,6 +27,9 @@ def handler(event, context):
                         if getRandom(5) and title == 'REBELS':
                             data['text'] = "@Basil_MrX ты знаешь что делать!"
                             sendToBot('sendMessage', data)
+                        elif getRandom(5) and title == 'REBELS':
+                            data['text'] = "@Basil_MrX твой выход!"
+                            sendToBot('sendMessage', data)
                         elif getRandom(20):
                             data['text'] = "Вы забываете правило ДА?"
                             sendToBot('sendMessage', data)
