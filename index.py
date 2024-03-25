@@ -27,12 +27,9 @@ def handler(event, context):
                     if "title" in fromMessage['chat']:
                         title = fromMessage['chat']['title']
 
-                    if message == 'да' or message == 'if':
+                    if message == 'да' or message == 'lf':
                         if getRandom(20) and title == 'REBELS':
-                            data['text'] = "@Basil_MrX ты знаешь что делать!"
-                            sendToBot('sendMessage', data)
-                        elif getRandom(20) and title == 'REBELS':
-                            data['text'] = "@Basil_MrX твой выход!"
+                            data['text'] = getRebelsMan()
                             sendToBot('sendMessage', data)
                         elif getRandom(20):
                             data['text'] = "Вы забываете правило ДА?"
@@ -103,6 +100,14 @@ def getMessageAnswerPizda():
         'В твоём анусе звезда!',
         'в жопе едут поезда!',
         '100 очков ГРИФФИНДОР этому господину!!!'
+    ]
+    return random.choice(message)
+
+def getRebelsMan():
+    message = [
+        "@Basil_MrX ты знаешь что делать!",
+        "@Basil_MrX твой выход!",
+        "@epicstdman тут чел не шарит!"
     ]
     return random.choice(message)
 
