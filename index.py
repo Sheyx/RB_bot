@@ -5,6 +5,10 @@ import os
 
 tokenBot = os.getenv('TELEGRAM_BOT_TOKEN')
 
+def handler2(event, context):
+    r = {'statusCode': 200, 'body': 'Message send'}
+    print('Message not send')
+    return r
 
 def handler(event, context):
     try:
@@ -24,10 +28,10 @@ def handler(event, context):
                         title = fromMessage['chat']['title']
 
                     if message == 'да' or message == 'if':
-                        if getRandom(5) and title == 'REBELS':
+                        if getRandom(20) and title == 'REBELS':
                             data['text'] = "@Basil_MrX ты знаешь что делать!"
                             sendToBot('sendMessage', data)
-                        elif getRandom(5) and title == 'REBELS':
+                        elif getRandom(20) and title == 'REBELS':
                             data['text'] = "@Basil_MrX твой выход!"
                             sendToBot('sendMessage', data)
                         elif getRandom(20):
@@ -55,6 +59,10 @@ def handler(event, context):
 
     except Exception as e:
         r = {'statusCode': 404, 'body': 'Same error'}
+        print('Incorrect message')
+    except TimeoutError as e:
+        r = {'statusCode': 200, 'body': 'Message not send'}
+        print('Message not send')
 
     return r
 
