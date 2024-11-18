@@ -38,11 +38,12 @@ def handler(event, context):
                             data['sticker'] = getPizdaSticker()
                             sendToBot('sendSticker', data)
 
+
                     elif message == 'пизда':
                         if getRandom(5):
                             data['text'] = getMessageAnswerPizda()
                             sendToBot('sendMessage', data)
-                        else:
+                        elif getRandom(2):
                             data['sticker'] = getStickerAnswer()
                             sendToBot('sendSticker', data)
 
@@ -83,6 +84,7 @@ def getPizdaSticker():
         'CAACAgIAAxkBAANQZfliNX5TzTlbiVWLKg3GhqCRRKwAAjUqAALm9vlJKp5EtAAB5dspNAQ',
         'CAACAgIAAxkBAAELxMJl_IuXD01Knq4G1Gg4SOVIcgMP1AACcTUAAvcl-EmrFIJq7VbWazQE',
         'CAACAgIAAxkBAAEEMXVl-zwWr0XgF-CVpziOphw5lg-3kAACxBIAAkOVmUpPyf4zUm0dLTQE',
+        'CAACAgIAAxkBAAIDkGYs7yCkWe3A-Yx8pAdHUgnFwQTJAAISAAO55ho62QiT8LenhLA0BA',
         'CAACAgQAAxkBAAEEMYll-z2BGOzo6nTQHQIdEe3ffyW9cQAC3QMAAj72Fwd0FUpFbL3jWjQE'
     ]
     return random.choice(sticker)
